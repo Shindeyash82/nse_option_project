@@ -1,0 +1,78 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Collector (once)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/collector.py",
+            "args": ["--once"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Collector (continuous)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/collector.py",
+            "args": ["--interval", "60"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Fetch & Predict",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/fetch_predict.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Real-time Loop",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/realtime_loop.py",
+            "args": ["--once"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Trainer",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/trainer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: API Server",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/api_server.py",
+            "args": ["--host", "0.0.0.0", "--port", "8000"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Streamlit App",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": ["run", "src/app.py"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Streamlit App (In-memory)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": ["run", "src/app_inmemory.py"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
+
+
+

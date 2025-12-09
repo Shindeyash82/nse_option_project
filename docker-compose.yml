@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  collector:
+    build: .
+    container_name: nse-collector
+    command: python src/collector.py
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - NSE_BASE_URL=${NSE_BASE_URL:-https://www.nseindia.com/api/option-chain-indices}
+    restart: unless-stopped
+    networks:
+      - nse-network
+
+  api:
+    build: .
+    container_name: nse-api
+    command: python src/api_server.py --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+    environment:
+      - NSE_BASE_URL=${NSE_BASE_URL:-https://www.nseindia.com/api/option-chain-indices}
+    depends_on:
+      - collector
+    restart: unless-stopped
+    networks:
+      - nse-network
+
+  streamlit:
+    build: .
+    container_name: nse-streamlit
+    command: streamlit run src/app.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - NSE_BASE_URL=${NSE_BASE_URL:-https://www.nseindia.com/api/option-chain-indices}
+    depends_on:
+      - collector
+    restart: unless-stopped
+    networks:
+      - nse-network
+
+networks:
+  nse-network:
+    driver: bridge
+
+
+
